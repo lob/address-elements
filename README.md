@@ -1,4 +1,4 @@
-# lob-address-elements
+# Address Elements
 The Lob Address Elements library simplifies client side integration of Lob's *US Address Autocompletion* and *US Address Verification* APIs. Use it to enrich any standard HTML page to include both autocompletion and pre-verification behaviors.
 
 ## Table of Contents
@@ -26,16 +26,16 @@ Create an account at [Lob.com](https://dashboard.lob.com/#/register) to obtain a
 Embed the Lob Address Elements script immediately before the closing &lt;body&gt; tag in the html containing your address form. The script will autodetect your form and its inputs.
 
 ```html
-  <script src="https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.js"
+  <script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js"
     data-lob-key="live_pub_xxx"></script>
 ```
-To view more configuration option see the [cheat sheet wiki](https://github.com/lob/lob-address-elements/wiki/Script-Attribute-Reference-Sheet)
+To view more configuration option see the [cheat sheet wiki](https://github.com/lob/address-elements/wiki/Script-Attribute-Reference-Sheet)
 
 ## Preconfigured Usage
-E-commerce platforms like Shopify use predictable element names making them easy to extend. Paste the following preconfigured script into your top-level Shopify Plus template to add address verification to your checkout form. *Remember to replace `live_pub_xxx` with your Lob public key.* 
+E-commerce platforms like Shopify use predictable element names making them easy to extend. Paste the following preconfigured script into your top-level Shopify Plus template to add address verification to your checkout form. *Remember to replace `live_pub_xxx` with your Lob public key.*
 
 ```html
-<script src="https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-verify-value="strict"
   data-lob-primary-value="false"
@@ -43,7 +43,7 @@ E-commerce platforms like Shopify use predictable element names making them easy
   data-lob-err-color="#ffffff"></script>
 
 <!-- Here's another example that places the verification message above the submit/continue button at checkout. -->
-<script src="https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-verify-value="strict"
   data-lob-primary-value="false"
@@ -51,7 +51,7 @@ E-commerce platforms like Shopify use predictable element names making them easy
   data-lob-err-color="#ffffff"
   data-lob-verify-message-anchor-class="step__footer"></script>
 ```
-*NOTE: Many E-commerce platforms have strict content security policies that prevent scripts from loading additional content. Embed the `merged` build of Address Elements to handle these situations as shown in the example above (lob-address-elements.min.merged.js). This ensures all dependencies are included in the download.*
+*NOTE: Many E-commerce platforms have strict content security policies that prevent scripts from loading additional content. Embed the `merged` build of Address Elements to handle these situations as shown in the example above (address-elements.min.merged.js). This ensures all dependencies are included in the download.*
 
 ## Multiform Usage
 Address elements can enrich multiple address forms at the same time, within the same Web page. Each address must be contained within a different HTML &lt;form&gt; parent for verification to function properly.
@@ -62,7 +62,7 @@ Address elements can enrich multiple address forms at the same time, within the 
     <form>
       ...
     </form>
-  
+
     <form>
       ...
     </form>
@@ -82,7 +82,7 @@ class MyComponent extends React.Component {
   // Place this inside the component containing your address form
   componentDidMount() {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -98,7 +98,7 @@ const MyComponent = () => {
   // Place this inside the component containing your address form
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -119,7 +119,7 @@ export default {
   ...
   mounted() {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -132,15 +132,15 @@ export default {
 
 
 ## Configuration and Customization
-See our [Script Attribute Reference Sheet wiki](https://github.com/lob/lob-address-elements/wiki/Script-Attribute-Reference-Sheet) for all the ways you can control the Address Elements script.
+See our [Script Attribute Reference Sheet wiki](https://github.com/lob/address-elements/wiki/Script-Attribute-Reference-Sheet) for all the ways you can control the Address Elements script.
 
 ## Form Detection
-With v2.0.0, when a script gets added to a page we search for inputs and labels with address-related key words. Any errors that may arise are displayed in the web page and the browser's console. 
+With v2.0.0, when a script gets added to a page we search for inputs and labels with address-related key words. Any errors that may arise are displayed in the web page and the browser's console.
 
 **In order to disable form detection you must provide the IDs to the address inputs in the AV elements script tag. Here is an example:**
 
 ```html
-<script src="https://cdn.lob.com/lob-address-elements/2.1.3/lob-address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-primary-id="address1"
   data-lob-secondary-id="address2"
@@ -181,7 +181,7 @@ The target address `form` is returned in the event `payload`, providing addition
 
 
 ## Component Styles
-For an in-depth guide to modifying the styles injected by Address Elements, please refer to our [styling guide wiki](https://github.com/lob/lob-address-elements/wiki/Styling-Guide).
+For an in-depth guide to modifying the styles injected by Address Elements, please refer to our [styling guide wiki](https://github.com/lob/address-elements/wiki/Styling-Guide).
 
 
 ## International Verification
@@ -191,7 +191,7 @@ _Note: Autocomplete functionality is disabled for international addresses._
 
 ## Examples
 
-This repo includes several [example](https://github.com/lob/lob-address-elements/tree/master/examples) implementations. These represent a range of HTML forms and environments that may be similar to your own.
+This repo includes several [example](https://github.com/lob/address-elements/tree/master/examples) implementations. These represent a range of HTML forms and environments that may be similar to your own.
 
 ## Contributing
 
@@ -199,9 +199,9 @@ To contribute, please see the [CONTRIBUTING.md](https://github.com/lob/lob-node/
 
 ## Building
 
-The minified version of the Address Elements library is available for download from the Lob CDN. You do not need to clone the Github repo to use in your Website. 
+The minified version of the Address Elements library is available for download from the Lob CDN. You do not need to clone the Github repo to use in your Website.
 
-If you do decide to fork and build your own instance of Address Elements, we use webpack for minifying your source. Execute via the CLI 
+If you do decide to fork and build your own instance of Address Elements, we use webpack for minifying your source. Execute via the CLI
 
 *NOTE: Webpack will bind the minified file name to the the version number in package.json*
 ```
@@ -211,14 +211,14 @@ npm run build
 ## Latest Release
 
 
-### 2.1.4 (CURRENT / LATEST)
+### 2.2.0 (CURRENT / LATEST)
 | Current Improvements |
 | :---          |
-| Adds new parameter `autosubmit` to control form submission after verification |
+| Moved code to new repo lob/address-elements to stay consistent with Lob's naming convention |
 
 
 
-[See release notes for previous versions](https://github.com/lob/lob-address-elements/wiki/Release-Notes)
+[See release notes for previous versions](https://github.com/lob/address-elements/wiki/Release-Notes)
 
 ----------
 

@@ -10,7 +10,7 @@
 <!--
 
     THIS EXAMPLE USES BOOTSTRAP TO LAY OUT THE ORIGINAL FORM AND ALREADY INCLUDES JQUERY. JQUERY IS USED
-    TO BIND A SUBMIT HANDLER TO THE FORM. IN THE BACKGROUND, THE LOB ADDRESS AUTOCOMPLETE PLUGIN INTERCEPTS THE 
+    TO BIND A SUBMIT HANDLER TO THE FORM. IN THE BACKGROUND, THE LOB ADDRESS AUTOCOMPLETE PLUGIN INTERCEPTS THE
     SUBMISSION AND FIRST VALIDATES BEFORE ALLOWING THE ORIGINAL SUBMIT BINDING TO EXECUTE.
 
     NO CUSTOM STYLES WERE APPLIED AND THE DEFAULT LAYOUTS PROVIDED BY THE PLUGIN WILL BE USED.
@@ -18,7 +18,7 @@
 -->
 
 <body class="container">
-  <div class="row">    
+  <div class="row">
   <h1 class="col-12">Lob Address Autocompletion</h1>
   <form action="/api/v1/add-address" class="col-12">
     <div class="form-group">
@@ -50,7 +50,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.37.0/autocomplete.jquery.min.js"></script>
   <script>
       $(function() {
-          //bind an onsubmit handler to the form. This simulates what it's like to 
+          //bind an onsubmit handler to the form. This simulates what it's like to
           // enhance a form that already implements jQuery behavior
           $("form").on('submit', function(e) {
               console.log("The form can now be submitted to its final endpoint");
@@ -59,10 +59,10 @@
           });
       });
   </script>
-  <script src="https://cdn.lob.com/lob-address-elements/2.0.0/lob-address-elements.min.js" 
+  <script src="https://cdn.lob.com/lob/address-elements/2.2.0/lob-address-elements.min.js"
     data-lob-key="live_pub_xxx"
     data-lob-verify-value="normal"
-    data-lob-primary-message-id="street1_err" 
+    data-lob-primary-message-id="street1_err"
     data-lob-zip-message-id="zip_err"></script>
 </body>
 </html>

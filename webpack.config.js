@@ -18,7 +18,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: `lob-address-elements-${package.version}.min.js`,
+    filename: `address-elements-${package.version}.min.js`,
     path: path.resolve(__dirname, 'lib'),
   },
 };
