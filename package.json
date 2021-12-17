@@ -2,7 +2,7 @@
   "version": "2.2.0",
   "scripts": {
     "demo": "node ./examples/server.js",
-    "build": "webpack",
+    "build": "webpack && ./build.sh",
     "lint": "eslint .",
     "test": "mocha --require @babel/register"
   },
