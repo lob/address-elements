@@ -177,7 +177,7 @@ export class LobAddressElements {
 
     if (query.match(/[A-Za-z0-9]/)) {
       const xhr = new XMLHttpRequest();
-      const path = `${apis.autocomplete}?av_elements_origin=${window.location.href}`;
+      const path = `${apis.autocomplete}?av_integration_origin=${window.location.href}&integration=av-elements`;
 
       xhr.open('POST', path, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
@@ -488,7 +488,7 @@ export class LobAddressElements {
     }
 
     const endpoint = this.config.international ? apis.intl_verify : apis.us_verify;
-    const path = endpoint + '?av_elements_origin=' + window.location.href;
+    const path = `${endpoint}?av_integration_origin=${window.location.href}&integration=av-elements`;
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', path, true);
