@@ -58,16 +58,19 @@ export class LobAddressElements {
         confirm: findValue('err-confirm') || 'Did you mean',
         DEFAULT: findValue('err-default') || 'Unknown Error. The address could not be verified.'
       },
-      apis: cfg.apis || {
-        autocomplete: 'https://api.lob.com/v1/us_autocompletions',
-        intl_verify: 'https://api.lob.com/v1/intl_verifications',
-        us_verify: 'https://api.lob.com/v1/us_verifications'
-      },
       do: {
         init: function () {
           LobAddressElements($, cfg, this.pageState);
         }
       }
+    };
+
+    const baseURL = findValue('env') === 'staging' ? 'https://api.lob-staging.com' : 'https://api.lob.com';
+
+    this.config.apis = cfg.apis || {
+      autocomplete: baseURL + '/v1/us_autocompletions',
+      intl_verify: baseURL + '/v1/intl_verifications',
+      us_verify: baseURL + '/v1/us_verifications'
     };
 
     if (this.pageState.autocomplete) {
