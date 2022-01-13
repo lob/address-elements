@@ -211,10 +211,11 @@ npm run build
 ## Latest Release
 
 
-### 2.2.0 (CURRENT / LATEST)
+### 2.2.1 (CURRENT / LATEST)
 | Current Improvements |
 | :---          |
-| Moved code to new repo lob/address-elements to stay consistent with Lob's naming convention |
+| Updates logic for metrics tracking |
+| Adds new script argument `data-lob-env-value` to switch between staging and production environments |
 
 
 
