@@ -26,7 +26,7 @@ Create an account at [Lob.com](https://dashboard.lob.com/#/register) to obtain a
 Embed the Lob Address Elements script immediately before the closing &lt;body&gt; tag in the html containing your address form. The script will autodetect your form and its inputs.
 
 ```html
-  <script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js"
+  <script src="https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.js"
     data-lob-key="live_pub_xxx"></script>
 ```
 To view more configuration option see the [cheat sheet wiki](https://github.com/lob/address-elements/wiki/Script-Attribute-Reference-Sheet)
@@ -35,7 +35,7 @@ To view more configuration option see the [cheat sheet wiki](https://github.com/
 E-commerce platforms like Shopify use predictable element names making them easy to extend. Paste the following preconfigured script into your top-level Shopify Plus template to add address verification to your checkout form. *Remember to replace `live_pub_xxx` with your Lob public key.*
 
 ```html
-<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-verify-value="strict"
   data-lob-primary-value="false"
@@ -43,7 +43,7 @@ E-commerce platforms like Shopify use predictable element names making them easy
   data-lob-err-color="#ffffff"></script>
 
 <!-- Here's another example that places the verification message above the submit/continue button at checkout. -->
-<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-verify-value="strict"
   data-lob-primary-value="false"
@@ -82,7 +82,7 @@ class MyComponent extends React.Component {
   // Place this inside the component containing your address form
   componentDidMount() {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -98,7 +98,7 @@ const MyComponent = () => {
   // Place this inside the component containing your address form
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -119,7 +119,7 @@ export default {
   ...
   mounted() {
     const script = document.createElement("script");
-    script.src = "https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.js";
+    script.src = "https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.js";
     script.async = true;
     script.setAttribute("data-lob-key", "live_pub_xxx");
     document.body.appendChild(script);
@@ -140,7 +140,7 @@ With v2.0.0, when a script gets added to a page we search for inputs and labels 
 **In order to disable form detection you must provide the IDs to the address inputs in the AV elements script tag. Here is an example:**
 
 ```html
-<script src="https://cdn.lob.com/lob/address-elements/2.2.0/address-elements.min.merged.js"
+<script src="https://cdn.lob.com/lob/address-elements/2.2.1/address-elements.min.merged.js"
   data-lob-key="live_pub_xxx"
   data-lob-primary-id="address1"
   data-lob-secondary-id="address2"
