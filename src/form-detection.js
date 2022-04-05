@@ -40,6 +40,10 @@ export const findElm = (type, form = null) => {
       elms = $('.' + pc);
     } else {
       elms = $('*[data-lob-' + type + ']');
+      // Avoid confusing address element state with the form state
+      if (type === 'state' && elms.length > 0 && elms.get(0).nodeName.toLowerCase() === 'form') {
+        elms = [];
+      }
     }
   }
 
@@ -186,6 +190,7 @@ const findAddressElementByInput = type => {
 };
 
 const resolveParsingResults = addressElements => {
+  const avHelpUrl = 'https://help.lob.com/integrations-av/av-elements#troubleshooting'
   let parseResultError = ''; 
 
   const international = isInternational(addressElements.country);
@@ -205,10 +210,10 @@ const resolveParsingResults = addressElements => {
     return searchResult === null || (searchResult && searchResult.length === 0);
   });
 
-  const multipleElements = Object.keys(addressElements).filter(key => {
+  const multipleElements = ['state', ...Object.keys(addressElements).filter(key => {
     const searchResult = addressElements[key];
     return searchResult && searchResult.filter(":visible").length > 1;
-  });
+  })];
 
   if (missingElements.length) {
     const formElementNames = missingElements.length > 1 
@@ -219,19 +224,19 @@ const resolveParsingResults = addressElements => {
       `[Lob AV Elements Error]:\tMissing form elements\n` +
       `Could not find inputs for ${formElementNames}.\n` +
       `Please add the following attributes to the AV elements script: ${formElementAttributes}\n` +
-      `For more information visit: https://www.lob.com/guides#av-elements-troubleshooting`;
+      `For more information visit: ${avHelpUrl}`;
     const htmlMessage =
       "<p style=\"text-align: left\">" +
       "[Lob AV Elements Error] Missing form elements<br/>" +
       `Could not find inputs for ${formElementNames}. ` +
       `Please add the following attributes to the AV elements script: <strong>${formElementAttributes}</strong>.<br/>` +
-      "For more information visit <a href=\"https://www.lob.com/guides#av-elements-troubleshooting\">https://www.lob.com/guides#av-elements-troubleshooting</a>" +
+      `For more information visit <a href=\"${avHelpUrl}\">${avHelpUrl}</a>` +
       "</p>";
   
     console.error(consoleMessage);
     parseResultError = htmlMessage;
   }
-  
+
   if (multipleElements.length) {
     const formElementNames = multipleElements.length > 1
       ? `${multipleElements.slice(0, -1).join(', ')}, and ${multipleElements.slice(-1)}`
@@ -241,13 +246,13 @@ const resolveParsingResults = addressElements => {
       `[Lob AV Elements Error]:\tDuplicate form elements\n` +
       `Multiple form elements were found for ${formElementNames}.\n` +
       `Please specify them by adding the following attributes to the AV elements script: ${formElementAttributes}\n` +
-      `For more information visit: https://www.lob.com/guides#av-elements-troubleshooting`;
+      `For more information visit: ${avHelpUrl}`;
     const htmlMessage =
       "<p style=\"text-align: left\">" +
       "[Lob AV Elements Error] Duplicate form elements<br/>" +
       `Multiple form elements were found for ${formElementNames}. ` +
       `Please specify them by adding the following attributes to the AV elements script: <strong>${formElementAttributes}</strong>.<br/>` +
-      "For more information visit <a href=\"https://www.lob.com/guides#av-elements-troubleshooting\">https://www.lob.com/guides#av-elements-troubleshooting</a>" +
+      `For more information visit <a href=\"${avHelpUrl}\">${avHelpUrl}</a>` +
       "</p>";
   
     console.error(consoleMessage);
