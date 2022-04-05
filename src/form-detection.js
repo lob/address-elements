@@ -210,10 +210,10 @@ const resolveParsingResults = addressElements => {
     return searchResult === null || (searchResult && searchResult.length === 0);
   });
 
-  const multipleElements = ['state', ...Object.keys(addressElements).filter(key => {
+  const multipleElements = Object.keys(addressElements).filter(key => {
     const searchResult = addressElements[key];
     return searchResult && searchResult.filter(":visible").length > 1;
-  })];
+  });
 
   if (missingElements.length) {
     const formElementNames = missingElements.length > 1 
