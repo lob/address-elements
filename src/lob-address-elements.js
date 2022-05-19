@@ -172,7 +172,6 @@ export class LobAddressElements {
   configureAutocompletion() {
     const {
       elements,
-      channel,
       suppress_stylesheet
     } = this.config;
 
@@ -194,24 +193,9 @@ export class LobAddressElements {
      * configure the Algolia Autocomplete plugin
      */
     if (isLiveEnv) {
+      // Attaches autocomplete functionality
       new Autocomplete(this.config, elements.primary);
-
-      // elements.primary.autocomplete(
-      //   {
-      //     hint: false
-      //   },
-      //   {
-      //     source: this.autocomplete.bind(this),
-      //     templates: {
-      //       suggestion: ({ primary_line, city, state, zip_code }) =>
-      //         $(`<div>${primary_line} <span>${city}, ${state} ${zip_code}</span></div>`)
-      //     },
-      //     cache: false
-      //   }).on('autocomplete:selected', (event, suggestion) => {
-      //     this.applySuggestion(suggestion);
-      //     channel.emit('elements.us_autocompletion.selection', { selection: suggestion, form: elements.form[0] });
-      //   });
-      }
+    }
   }
 
 

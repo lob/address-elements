@@ -95,18 +95,15 @@ export class Autocomplete {
      */
     applySuggestion(suggestion) {
         const { elements } = this.config;
-        // Check autocomplete in case we're in running in a unit test
-        const isLiveEnv = typeof elements.primary.autocomplete === 'function';
-
-        if (isLiveEnv) {
-            elements.primary.autocomplete('val', suggestion.primary_line);
-        } else {
-            elements.primary.val(suggestion.primary_line);
-        }
+        elements.primary.val(suggestion.primary_line);
         elements.secondary.val('');
         elements.city.val(suggestion.city);
-        elements.state.val(suggestion.state);
+        elements.state.val(suggestion.state.toUpperCase());
         elements.zip.val(suggestion.zip_code);
+        // Remove list
+        $('#lob-dropdown').remove();
+        // Notify user
+        this.config.channel.emit('elements.us_autocompletion.selection', { selection: suggestion, form: elements.form[0] });
     }
 
     // Render functions
@@ -166,11 +163,18 @@ export class Autocomplete {
         `);
 
         suggestions.forEach(address => {
-            const suggestionListItem = this.formatAddress(address);
-            suggestionListItem.on('click', () => {
-              console.log('clicked', address)
-            })
-            listContainer.append(suggestionListItem)
+          const suggestionListItem =
+            this.formatAddress(address)
+              .on('click', () => {
+                this.applySuggestion(address);
+              })
+              .on('keypress', e => {
+                if(e.key == 'Enter') {
+                  this.applySuggestion(address);
+                }
+              });
+
+          listContainer.append(suggestionListItem)
         });
 
         return listContainer;
