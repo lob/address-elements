@@ -2,7 +2,7 @@ import { countryCodes, isInternational } from './international-utils.js';
 import { findElm, findValue, parseWebPage } from './form-detection.js';
 import { createAutocompleteStyles, createVerifyMessageStyles } from './stylesheets.js';
 import { getFormStates } from './main.js';
-import { configureAutocomplete } from './autocomplete.js';
+import { Autocomplete } from './autocomplete.js';
 
 const resolveStyleStrategy = (cfg, form) => {
   const isEmptyObject = Object.keys(cfg).length <= 1 && cfg.constructor === Object;
@@ -167,82 +167,6 @@ export class LobAddressElements {
   // Autocomplete functionality
 
   /**
-   * query Lob for autocomplete suggestions
-   * @param {string} query - what the user just keyed into the autocomplete input
-   * @param {function} cb - callback
-   */
-  autocomplete(query, cb) {
-    const { apis, api_key, channel, elements } = this.config;
-
-    this.config.international = isInternational(elements.country);
-
-    if (this.config.international) {
-      return false;
-    }
-
-    if (query.match(/[A-Za-z0-9]/)) {
-      const xhr = new XMLHttpRequest();
-      const path = `${apis.autocomplete}?av_integration_origin=${window.location.href}&integration=av-elements`;
-
-      xhr.open('POST', path, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      if (api_key) {
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(api_key + ':'));
-      }
-      xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-          if (this.status === 200) {
-            try {
-              const data = JSON.parse(xhr.responseText);
-              channel.emit('elements.us_autocompletion.suggestion', { suggestions: data.suggestions, form: elements.form[0] });
-              cb(data.suggestions);
-            } catch (e) {
-              cb(null);
-            }
-          } else if (this.status === 401) {
-            //INVALID API KEY; allow default submission
-            console.log('Please sign up on lob.com to get a valid api key.');
-            channel.emit('elements.us_autocompletion.error', { code: 401, message: 'Please sign up on lob.com to get a valid api key.', form: elements.form[0] });
-            cb(null);
-          } else {
-            channel.emit('elements.us_autocompletion.error', { code: 500, message: 'Unknown error.', form: elements.form[0] });
-            cb(null);
-          }
-        }
-      }
-      xhr.send(JSON.stringify({
-        address_prefix: query,
-        city: elements.city.val(),
-        zip_code: elements.zip.val(),
-        state: elements.state.val(),
-        geo_ip_sort: true
-      }));
-    }
-    return false;
-  }
-
-
-  /**
-   * Project the chosen suggested address into the UI
-   * @param {object} suggestion - as returned from the Lob API
-   */
-  applySuggestion(suggestion) {
-    const { elements } = this.config;
-    // Check autocomplete in case we're in running in a unit test
-    const isLiveEnv = typeof elements.primary.autocomplete === 'function';
-
-    if (isLiveEnv) {
-      elements.primary.autocomplete('val', suggestion.primary_line);
-    } else {
-      elements.primary.val(suggestion.primary_line);
-    }
-    elements.secondary.val('');
-    elements.city.val(suggestion.city);
-    elements.state.val(suggestion.state);
-    elements.zip.val(suggestion.zip_code);
-  }
-
-  /**
    * Injects styles, behaviors and fields necessary for address autocompletion
    */
   configureAutocompletion() {
@@ -270,7 +194,7 @@ export class LobAddressElements {
      * configure the Algolia Autocomplete plugin
      */
     if (isLiveEnv) {
-      configureAutocomplete(elements.primary, this.config);
+      new Autocomplete(this.config, elements.primary);
 
       // elements.primary.autocomplete(
       //   {

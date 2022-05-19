@@ -18,13 +18,7 @@ const resolveInputWidth = config => {
     }
 }
 
-export const createAutocompleteStyles = config =>
-    `.algolia-autocomplete {
-    display: ${resolveInputDisplay(config)};
-    width: ${resolveInputWidth(config)};
-    vertical-align: middle;
-  }
-
+export const createAutocompleteStyles = config => `  
   .lob-dropdown-menu {
     box-sizing: border-box;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
@@ -32,11 +26,14 @@ export const createAutocompleteStyles = config =>
     border-radius: 0 0 .25rem .25rem;
     border-top: 0;
     background-color: ${resolveInlineStyle(config, 'suggestion', 'bgcolor')};
+    display: ${resolveInputDisplay(config)};
+    vertical-align: middle;
     overflow-x: hidden;
     overflow-y: scroll;
+    position: absolute;
     margin-top: 0.5rem;
     max-height: 400px;
-    width: 100%;
+    width: ${resolveInputWidth(config)};
   }
 
   .lob-label {
@@ -72,48 +69,26 @@ export const createAutocompleteStyles = config =>
   }
 
   .lob-suggestion:hover,
-  .lob-suggestion:active {
+  .lob-suggestion:active,
+  .lob-suggestion:focus-visible {
     color: ${resolveInlineStyle(config, 'suggestion', 'activecolor')};
     background-color: ${resolveInlineStyle(config, 'suggestion', 'activebgcolor')};
   }
+
   .lob-suggestion div {
     white-space: nowrap !important;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .lob-suggestion span {
     font-size: .8em;
   }
+
   .lob-light-text {
     color: #888888;
   }
-
 `;
-
-// .lob-dropdown-list {
-//   background: var(--lob-suggestion-item-background-color);
-//   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-//   border: 1px solid #ddd;
-//   border-radius: 4px;
-//   max-height: 400px;
-//   overflow-y: auto;
-//   position: absolute;
-//   transform: translateY(.333rem);
-//   white-space: nowrap;
-//   min-width: 100%;
-//   z-index: 9;
-// }
-
-// .lob-dropdown-list-item {
-//   color: var(--lob-suggestion-item-text-color);
-//   cursor: pointer;
-//   padding: 0.5rem 1rem;
-//   text-align: left;
-// }
-
-// .lob-dropdown-list-item-active {
-//   background-color: var(--lob-suggestion-item-active-background-color);
-// }
 
 export const createVerifyMessageStyles = config => `
   .lob-verify-message {
