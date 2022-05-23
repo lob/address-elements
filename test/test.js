@@ -26,7 +26,6 @@ describe('Address Elements', () => {
 
             global.$ = global.jQuery = require('jquery');
             global.window.jQuery = global.jQuery;
-            global.window.jQuery.fn.autocomplete = require('jquery-ui');
 
             // This fake observer will mock a change event which will kick off the Address Elements script
             global.window.MutationObserver = didChange => {

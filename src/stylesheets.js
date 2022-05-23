@@ -1,21 +1,21 @@
 import { findValue } from './form-detection.js';
 
 function resolveInlineStyle(config, type, subtype) {
-    return findValue(type + '-' + subtype) || config.styles[type + '-' + subtype];
+  return findValue(type + '-' + subtype) || config.styles[type + '-' + subtype];
 }
 
 const resolveInputDisplay = config => {
-    const display = config.elements.primary.css('display');
-    return display.toLowerCase() === 'block' ? 'block' : '';
+  const display = config.elements.primary.css('display');
+  return display.toLowerCase() === 'block' ? 'block' : '';
 }
 
 const resolveInputWidth = config => {
-    const display = config.elements.primary.css('display');
-    if (display.toLowerCase() === 'block') {
-        return '100%';
-    } else {
-        return config.elements.primary.css('width') || (config.elements.primary.outerWidth() + 'px');
-    }
+  const display = config.elements.primary.css('display');
+  if (display.toLowerCase() === 'block') {
+    return '100%';
+  } else {
+    return config.elements.primary.css('width') || (config.elements.primary.outerWidth() + 'px');
+  }
 }
 
 export const createAutocompleteStyles = config => `  
@@ -106,4 +106,5 @@ export const createVerifyMessageStyles = config => `
     text-align: center;
     transform: translate(-50%, 0%);
     width: 100%;
-  }`;
+  }
+`;
