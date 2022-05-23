@@ -73,6 +73,9 @@ Address elements can enrich multiple address forms at the same time, within the 
 
 
 ## React Usage
+
+We have a React component library! Check out [@lob/react-address-autocomplete](https://www.npmjs.com/package/@lob/react-address-autocomplete) for a smoother developer experience.
+
 Address Elements assumes an address form already exists on your web page when it starts up. This is usually not the case for most React apps, so you will need to load the script after your address form is done rendering/mounting.
 
 **Using Life Cycle methods**
@@ -112,6 +115,9 @@ const MyComponent = () => {
 
 
 ## Vue Usage
+
+We have a Vue component library too! [@lob/vue-address-autocomplete](https://www.npmjs.com/package/@lob/vue-address-autocomplete) has all of your Vue autocomplete needs.
+
 Similar to React, add the script tag after your address form component has rendered.
 ```jsx
 // Place this inside the component containing your address form
@@ -211,10 +217,10 @@ npm run build
 ## Latest Release
 
 
-### 2.2.2 (CURRENT / LATEST)
+### 2.2.3 (CURRENT / LATEST)
 | Current Improvements |
 | :---          |
-| Updates help link to Lob's new help center |
+| Removes Algolia/jQuery autocomplete dependency |suggestion
 
 
 [See release notes for previous versions](https://github.com/lob/address-elements/wiki/Release-Notes)
