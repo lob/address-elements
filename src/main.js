@@ -131,8 +131,7 @@ export const getFormStates = cfg => {
    * CDN URLs for required dependencies
    */
   const paths = {
-    jquery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js',
-    jquery_ac: 'https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.37.0/autocomplete.jquery.min.js',
+    jquery: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'
   }
 
   /**
@@ -157,19 +156,6 @@ export const getFormStates = cfg => {
         BootStrapper.load(arguments);
       }
     },
-    jquery_autocomplete: function () {
-      if (!window.jQuery.fn.autocomplete) {
-        const jqac = document.createElement('script');
-        const args = arguments;
-        jqac.onload = function () {
-          BootStrapper.load(args);
-        };
-        jqac.src = paths.jquery_ac;
-        document.getElementsByTagName('body')[0].appendChild(jqac);
-      } else {
-        BootStrapper.load(arguments);
-      }
-    },
     address_elements: function () {
       if (!window.LobAddressElements) {
         const config = window.LobAddressElementsConfig || {};
@@ -188,5 +174,5 @@ export const getFormStates = cfg => {
       }
     }
   }
-  BootStrapper.load(['jquery', 'jquery_autocomplete', 'address_elements']);
+  BootStrapper.load(['jquery', 'address_elements']);
 })();

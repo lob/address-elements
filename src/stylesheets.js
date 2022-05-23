@@ -18,40 +18,77 @@ const resolveInputWidth = config => {
   }
 }
 
-export const createAutocompleteStyles = config =>
-  `.algolia-autocomplete {
-    display: ${resolveInputDisplay(config)};
-    width: ${resolveInputWidth(config)};
-    vertical-align: middle;
-  }
-  .aa-dropdown-menu {
-    width: 100%;
+export const createAutocompleteStyles = config => `  
+  .lob-dropdown-menu {
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
     border: 1px solid ${resolveInlineStyle(config, 'suggestion', 'bordercolor')};
+    border-radius: 0 0 .25rem .25rem;
     border-top: 0;
     background-color: ${resolveInlineStyle(config, 'suggestion', 'bgcolor')};
-    overflow: hidden;
-    border-radius: 0 0 .25rem .25rem;
-    margin-top:-5px;
+    display: ${resolveInputDisplay(config)};
+    vertical-align: middle;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    margin-top: 0.5rem;
+    max-height: 400px;
+    width: ${resolveInputWidth(config)};
   }
-  .aa-suggestion {
+
+  .lob-label {
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
     cursor: pointer;
-    padding: 6px 12px;
+    display: flex;
+    font-size: 17px;
+    padding: 1rem;
+  }
+
+  .lob-label > a {
+    font-weight: 600;
+    color: #0699D6;
+    text-decoration: inherit;
+    margin-left: 12px;
+  }
+
+  .lob-label > span {
+    flex: 1;
+    margin-left: 12px;
+    margin-top: auto;
+  }
+
+  .lob-logo {
+    height: 21px;
+  }
+
+  .lob-suggestion {
+    cursor: pointer;
+    padding: 12px;
     color: ${resolveInlineStyle(config, 'suggestion', 'color')};
   }
-  .aa-suggestion:hover,
-  .aa-suggestion:active,
-  .aa-suggestion.aa-cursor  {
+
+  .lob-suggestion:hover,
+  .lob-suggestion:active,
+  .lob-suggestion:focus-visible {
     color: ${resolveInlineStyle(config, 'suggestion', 'activecolor')};
     background-color: ${resolveInlineStyle(config, 'suggestion', 'activebgcolor')};
   }
-  .aa-suggestion div {
+
+  .lob-suggestion div {
     white-space: nowrap !important;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .aa-suggestion span {
+
+  .lob-suggestion span {
     font-size: .8em;
-  }`;
+  }
+
+  .lob-light-text {
+    color: #888888;
+  }
+`;
 
 export const createVerifyMessageStyles = config => `
   .lob-verify-message {
@@ -69,4 +106,5 @@ export const createVerifyMessageStyles = config => `
     text-align: center;
     transform: translate(-50%, 0%);
     width: 100%;
-  }`;
+  }
+`;

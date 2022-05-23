@@ -26,7 +26,6 @@ describe('Address Elements', () => {
 
             global.$ = global.jQuery = require('jquery');
             global.window.jQuery = global.jQuery;
-            global.window.jQuery.fn.autocomplete = require('jquery-ui');
 
             // This fake observer will mock a change event which will kick off the Address Elements script
             global.window.MutationObserver = didChange => {
@@ -90,7 +89,8 @@ describe('Address Elements', () => {
         it('should return a suggestion for alphanumeric entries', () => {
             const xhr_config = { responseText: JSON.stringify(APIMock.suggestions) };
             global.XMLHttpRequest = XHRMock(xhr_config);
-            LobAddressElements.autocomplete('185 Berry', suggestions => {
+            LobAddressElements.autocomplete.query = '185 Berry';
+            LobAddressElements.autocomplete.getSuggestions(suggestions => {
                 expect(suggestions).to.have.lengthOf(1);
             });
         });
@@ -98,7 +98,8 @@ describe('Address Elements', () => {
         it('should return a suggestion for numeric entries', () => {
             const xhr_config = { responseText: JSON.stringify(APIMock.suggestions) };
             global.XMLHttpRequest = XHRMock(xhr_config);
-            LobAddressElements.autocomplete('185', suggestions => {
+            LobAddressElements.autocomplete.query = '185';
+            LobAddressElements.autocomplete.getSuggestions(suggestions => {
                 expect(suggestions).to.have.lengthOf(1);
             });
         });
@@ -106,13 +107,15 @@ describe('Address Elements', () => {
         it('should return a suggestion for alpha entries', () => {
             const xhr_config = { responseText: JSON.stringify(APIMock.suggestions) };
             global.XMLHttpRequest = XHRMock(xhr_config);
-            LobAddressElements.autocomplete('Berry', suggestions => {
+            LobAddressElements.autocomplete.query = 'Berry';
+            LobAddressElements.autocomplete.getSuggestions(suggestions => {
                 expect(suggestions).to.have.lengthOf(1);
             });
         });
 
         it('should return no suggestions for empty entries', () => {
-            LobAddressElements.autocomplete('', suggestions => {
+            LobAddressElements.autocomplete.query = '';
+            LobAddressElements.autocomplete.getSuggestions(suggestions => {
                 expect(suggestions).equals(null);
             });
         });
@@ -120,7 +123,8 @@ describe('Address Elements', () => {
         it('should return no suggestions when x-rate-limit is exceeded', () => {
             const xhr_config = { status: 401 };
             global.XMLHttpRequest = XHRMock(xhr_config);
-            LobAddressElements.autocomplete('185 Berry', suggestions => {
+            LobAddressElements.autocomplete.query = '185 Berry';
+            LobAddressElements.autocomplete.getSuggestions(suggestions => {
                 expect(suggestions).equals(null);
             });
         });
@@ -133,10 +137,10 @@ describe('Address Elements', () => {
                 state: 'state_response',
                 zip_code: 'zip_code_response'
             }
-            LobAddressElements.applySuggestion(suggestion);
+            LobAddressElements.autocomplete.applySuggestion(suggestion);
             expect(LobAddressElements.config.elements.primary.val()).equals('primary_line_response');
             expect(LobAddressElements.config.elements.city.val()).equals('city_response');
-            expect(LobAddressElements.config.elements.state.val()).equals('state_response');
+            expect(LobAddressElements.config.elements.state.val()).equals('STATE_RESPONSE');
             expect(LobAddressElements.config.elements.zip.val()).equals('zip_code_response');
         });
 
@@ -150,7 +154,7 @@ describe('Address Elements', () => {
             }
             LobAddressElements.config.elements.secondary.val("STALE VALUE");
             expect(LobAddressElements.config.elements.secondary.val()).equals('STALE VALUE');
-            LobAddressElements.applySuggestion(suggestion);
+            LobAddressElements.autocomplete.applySuggestion(suggestion);
             expect(LobAddressElements.config.elements.secondary.val()).equals('');
         });
     });
