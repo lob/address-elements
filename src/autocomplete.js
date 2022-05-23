@@ -6,27 +6,27 @@ export class Autocomplete {
         this.query = '';
 
         element.on('input', (e) => {
-            this.query = e.target.value
-            this.getAutocompleteSuggestions(suggestions => {
-                if (!suggestions) {
-                    return;
-                }
+          this.query = e.target.value
+          this.getSuggestions(suggestions => {
+            if (!suggestions) {
+              return;
+            }
 
-                const suggestionListItems = this.generateSuggestionListItems(suggestions);
-                const currentDropdown = $('#lob-dropdown');
+            const suggestionListItems = this.generateSuggestionListItems(suggestions);
+            const currentDropdown = $('#lob-dropdown');
 
-                // Add dropdown UI or replace existing one with latest address suggestions 
-                if (currentDropdown.length) {
-                    currentDropdown.empty().append(suggestionListItems);
-                } else {
-                    const dropdownElement = $(`
-                      <div id="lob-dropdown" class="lob-dropdown-menu"></div>
-                    `)
-                    dropdownElement.append(suggestionListItems);
-                    element.after(dropdownElement);
-                }
-            });
-        })
+            // Add dropdown UI or replace existing one with latest address suggestions 
+            if (currentDropdown.length) {
+              currentDropdown.empty().append(suggestionListItems);
+            } else {
+              const dropdownElement = $(`
+                <div id="lob-dropdown" class="lob-dropdown-menu"></div>
+              `)
+              dropdownElement.append(suggestionListItems);
+              element.after(dropdownElement);
+            }
+          });
+        });
     }
 
     /**
@@ -35,7 +35,7 @@ export class Autocomplete {
      * @param {Object} config - the state of the address elements script
      * @param {function} cb - callback
      */
-    getAutocompleteSuggestions(cb) {
+    getSuggestions(cb) {
         const { apis, api_key, channel, elements } = this.config;
 
         this.config.international = isInternational(elements.country);

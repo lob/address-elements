@@ -186,16 +186,8 @@ export class LobAddressElements {
         .appendTo('head');
     }
 
-    // Check autocomplete in case we're in running in a unit test
-    const isLiveEnv = typeof elements.primary.autocomplete === 'function';
-
-    /**
-     * configure the Algolia Autocomplete plugin
-     */
-    if (isLiveEnv) {
-      // Attaches autocomplete functionality
-      new Autocomplete(this.config, elements.primary);
-    }
+    // Attaches autocomplete functionality for testing
+    this.autocomplete = new Autocomplete(this.config, elements.primary);
   }
 
 
