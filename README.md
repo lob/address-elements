@@ -217,10 +217,10 @@ npm run build
 ## Latest Release
 
 
-### 2.2.3 (CURRENT / LATEST)
+### 2.2.4 (CURRENT / LATEST)
 | Current Improvements |
 | :---          |
-| Removes Algolia/jQuery autocomplete dependency |suggestion
+| Resolves critical dependency findings |
 
 
 [See release notes for previous versions](https://github.com/lob/address-elements/wiki/Release-Notes)
