@@ -32,7 +32,7 @@ export const getFormStates = cfg => {
   const responses = [];
   primaries.each((idx, primary) => {
     primary = $(primary);
-    const form = primary.closest("form");
+    const form = primary.closest('form');
     const strictness = resolveStrictness(cfg ? cfg.strictness : null, form);
     const create_message = findValue('verify-message', form) === 'true' || (form.length && !findElm('verify-message', form).length);
     const autocomplete = primary.length && findValue('primary', form) !== 'false';
@@ -76,9 +76,9 @@ export const getFormStates = cfg => {
 
     const updateFormState = newState => {
       const { enrich, form } = newState;
-      const state = form && form.attr("data-lob-state") || 'untouched';
+      const state = form && form.attr('data-lob-state') || 'untouched';
       if (state === 'untouched' && enrich) {
-        form.attr("data-lob-state", 'enriched');
+        form.attr('data-lob-state', 'enriched');
         setTimeout(() => {
           const av = new LobAddressElements($, cfg, newState)
 
@@ -90,14 +90,14 @@ export const getFormStates = cfg => {
           window.LobAddressElements.instances.push(av);
         }, 0);
       } else if (state === 'enriched' && !enrich) {
-        form.attr("data-lob-state", 'untouched');
+        form.attr('data-lob-state', 'untouched');
       }
     };
 
     /**
      * Observe the DOM. Trigger enrichment when state changes to 'enrich'
      */
-    const observeDOM = state => {
+    const observeDOM = () => {
       const didChange = () => {
         const newStates = getFormStates(cfg);
         newStates.forEach(updateFormState);
