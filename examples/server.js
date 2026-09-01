@@ -1,5 +1,5 @@
 const express = require('express');
-var path = require("path");
+var path = require('path');
 const app = express();
 
 app.use('/src', express.static('src'));

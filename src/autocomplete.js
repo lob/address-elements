@@ -64,7 +64,7 @@ export class Autocomplete {
                             const data = JSON.parse(xhr.responseText);
                             channel.emit('elements.us_autocompletion.suggestion', { suggestions: data.suggestions, form: elements.form[0] });
                             cb(data.suggestions);
-                        } catch (e) {
+                        } catch {
                             cb(null);
                         }
                     } else if (this.status === 401) {

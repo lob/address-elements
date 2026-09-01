@@ -68,6 +68,7 @@ describe('Address Elements', () => {
     });
 
     after(() => {
+        clock.restore();
         window._virtualConsole.emit = emit;
         for (let p in refs) {
             global[p] = refs[p];

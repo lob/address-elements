@@ -10,7 +10,7 @@ const closest = (elms, form) => {
   if (form && form.length && elms && elms.length) {
     let elm;
     elms.each(function (idx, _elm) {
-      if (form.is(_elm.closest("form"))) {
+      if (form.is(_elm.closest('form'))) {
         elm = $(_elm);
       }
     });
@@ -117,7 +117,7 @@ const findAddressElementByLabel = (type, form) => {
     return null;
   }
 
-  const labels = selections.filter("label");
+  const labels = selections.filter('label');
 
   const getInputSelections = label => {
     const inputId = label.htmlFor;
@@ -126,17 +126,17 @@ const findAddressElementByLabel = (type, form) => {
       return inputSelections;
     }
 
-    const siblingSelections = $(label).siblings("input");
+    const siblingSelections = $(label).siblings('input');
     if (siblingSelections.length) {
       return siblingSelections;
     }
 
-    const childSelections = $(label).children("input");
+    const childSelections = $(label).children('input');
     if (childSelections.length) {
       return childSelections;
     }
 
-    const parentSelections = $(label).parentsUntil("form", "input");
+    const parentSelections = $(label).parentsUntil('form', 'input');
     if (parentSelections.length) {
       return parentSelections;
     }
@@ -212,7 +212,7 @@ const resolveParsingResults = addressElements => {
 
   const multipleElements = Object.keys(addressElements).filter(key => {
     const searchResult = addressElements[key];
-    return searchResult && searchResult.filter(":visible").length > 1;
+    return searchResult && searchResult.filter(':visible').length > 1;
   });
 
   if (missingElements.length) {
@@ -221,17 +221,17 @@ const resolveParsingResults = addressElements => {
       : missingElements[0].toString();
     const formElementAttributes = missingElements.map(name => `data-lob-${name}-id`).join(', ');
     const consoleMessage =
-      `[Lob AV Elements Error]:\tMissing form elements\n` +
+      '[Lob AV Elements Error]:\tMissing form elements\n' +
       `Could not find inputs for ${formElementNames}.\n` +
       `Please add the following attributes to the AV elements script: ${formElementAttributes}\n` +
       `For more information visit: ${avHelpUrl}`;
     const htmlMessage =
-      "<p style=\"text-align: left\">" +
-      "[Lob AV Elements Error] Missing form elements<br/>" +
+      '<p style="text-align: left">' +
+      '[Lob AV Elements Error] Missing form elements<br/>' +
       `Could not find inputs for ${formElementNames}. ` +
       `Please add the following attributes to the AV elements script: <strong>${formElementAttributes}</strong>.<br/>` +
-      `For more information visit <a href=\"${avHelpUrl}\">${avHelpUrl}</a>` +
-      "</p>";
+      `For more information visit <a href="${avHelpUrl}">${avHelpUrl}</a>` +
+      '</p>';
   
     console.error(consoleMessage);
     parseResultError = htmlMessage;
@@ -243,17 +243,17 @@ const resolveParsingResults = addressElements => {
       : multipleElements[0].toString();
     const formElementAttributes = multipleElements.map(name => `data-lob-${name}-id`).join(', ');
     const consoleMessage =
-      `[Lob AV Elements Error]:\tDuplicate form elements\n` +
+      '[Lob AV Elements Error]:\tDuplicate form elements\n' +
       `Multiple form elements were found for ${formElementNames}.\n` +
       `Please specify them by adding the following attributes to the AV elements script: ${formElementAttributes}\n` +
       `For more information visit: ${avHelpUrl}`;
     const htmlMessage =
-      "<p style=\"text-align: left\">" +
-      "[Lob AV Elements Error] Duplicate form elements<br/>" +
+      '<p style="text-align: left">' +
+      '[Lob AV Elements Error] Duplicate form elements<br/>' +
       `Multiple form elements were found for ${formElementNames}. ` +
       `Please specify them by adding the following attributes to the AV elements script: <strong>${formElementAttributes}</strong>.<br/>` +
-      `For more information visit <a href=\"${avHelpUrl}\">${avHelpUrl}</a>` +
-      "</p>";
+      `For more information visit <a href="${avHelpUrl}">${avHelpUrl}</a>` +
+      '</p>';
   
     console.error(consoleMessage);
     parseResultError = parseResultError + htmlMessage;

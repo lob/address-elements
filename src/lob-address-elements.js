@@ -42,7 +42,6 @@ export class LobAddressElements {
         'err-bgcolor': '#eeeeee',
         'suggestion-color': '#111111',
         'suggestion-bgcolor': '#ffffff',
-        'suggestion-bordercolor': '#a8a8a8',
         'suggestion-activecolor': '#111111',
         'suggestion-activebgcolor': '#eeeeee',
         'suggestion-bordercolor': '#eeeeee',
@@ -271,7 +270,7 @@ export class LobAddressElements {
     const address = this.config.address = this.formatAddressFromResponseData(data);
 
     for (let p in address) {
-      if (address.hasOwnProperty(p)) {
+      if (Object.prototype.hasOwnProperty.call(address, p)) {
         const formInput = elements[p].val();
         const dataDoesNotMatchFormInput = address[p].toUpperCase() !== formInput.toUpperCase();
         // Standard 5-digit zip input is good enough. We don't care if it doesn't match response data's zip with +4
@@ -314,7 +313,7 @@ export class LobAddressElements {
     const { address, elements, strictness } = this.config;
     if (strictness !== 'passthrough' && address) {
       for (let p in address) {
-        if (address.hasOwnProperty(p) &&
+        if (Object.prototype.hasOwnProperty.call(address, p) &&
           elements[p].val().toUpperCase() !== address[p].toUpperCase()) {
           return false;
         }
@@ -344,7 +343,7 @@ export class LobAddressElements {
 
   format(template, args) {
     for (let k in args) {
-      template = template.replace("{" + k + "}", args[k])
+      template = template.replace('{' + k + '}', args[k])
     }
     return template;
   }
@@ -354,8 +353,8 @@ export class LobAddressElements {
     const info = this.config.messages.confirm; // Did you mean
     const modifiedAddress = `${primary} ${secondary} ${city} ${state} ${zip}`;
     return `
-      <span style=\"cursor: pointer\">
-        ${info} <span style=\"text-decoration: underline\">${modifiedAddress}</span>?
+      <span style="cursor: pointer">
+        ${info} <span style="text-decoration: underline">${modifiedAddress}</span>?
       </span>
     `;
   }
