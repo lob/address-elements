@@ -27,6 +27,6 @@ sed -i '' "s/${VERSION_MIN_FILE_NAME}/${AWS_MIN_FILE_NAME}/g" lib/$AWS_MAP_FILE_
 
 # Recreate merged files with new mininified code
 rm lib/address-elements.min.merged.js
-sed "s/lob address elements [[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+/lob address elements${PACKAGE_VERSION}/g" lib/merged-dependencies.js > lib/address-elements.min.merged.js
+sed -E "s/lob address elements [0-9]+\.[0-9]+\.[0-9]+/lob address elements${PACKAGE_VERSION}/g" lib/merged-dependencies.js > lib/address-elements.min.merged.js
 cat lib/$AWS_MIN_FILE_NAME >> lib/address-elements.min.merged.js
 cp  lib/$AWS_MAP_FILE_NAME lib/address-elements.min.merged.js.map
