@@ -1,7 +1,7 @@
 {
   "version": "2.2.5",
   "scripts": {
-    "demo": "node ./examples/server.js",
+    "demo": "node --env-file-if-exists=.env ./examples/server.js",
     "build": "webpack && ./build.sh",
     "lint": "eslint .",
     "test": "mocha --require @babel/register"

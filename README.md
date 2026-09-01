@@ -199,6 +199,12 @@ _Note: Autocomplete functionality is disabled for international addresses._
 
 This repo includes several [example](https://github.com/lob/address-elements/tree/master/examples) implementations. These represent a range of HTML forms and environments that may be similar to your own.
 
+Run `npm run demo` to serve `examples/vanilla_css_styles.html` locally at `http://localhost:8080`. By default it uses a placeholder `live_pub_xxx` key, which only exercises the auth-failure path. To test against the real API, create a `.env` file in the repo root (already gitignored) with:
+```
+LOB_PUBLIC_KEY=live_pub_yourrealkeyhere
+```
+`npm run demo` picks it up automatically. Never paste a real key directly into a tracked file, it's meant to be injected at request time.
+
 ## Contributing
 
 To contribute, please see the [CONTRIBUTING.md](https://github.com/lob/lob-node/blob/master/CONTRIBUTING.md) file.
