@@ -14,4 +14,9 @@ app.get('/', (req, res) => {
   res.send(html.replace('live_pub_xxx', process.env.LOB_PUBLIC_KEY || 'live_pub_xxx'));
 });
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+app.listen(8080, error => {
+  if (error) {
+    throw error;
+  }
+  console.log('Listening on port 8080!');
+});
